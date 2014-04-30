@@ -1,13 +1,13 @@
 Warning: This document is not final by any means, and is still subject to frequent changes.
 
-Xennet RFC
-==========
+    Xennet RFC
+    ==========
 
-Ohad Asor
+    Ohad Asor
 
-Rev.0: 28 Feb 2014
+    Rev.0: 28 Feb 2014
 
-Rev.1: 30 Apr 2014
+    Rev.1: 30 Apr 2014
 
 We present Xennet (pronounced “Zennet”), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software.
 
@@ -135,10 +135,14 @@ Technical Notes
 
 3.  The task and acceptance transaction sizes should not exceed several dozens or a few hundreds of bytes, hence adequate to the Bitcoin’s blockchain.
 
-4.  The main difference between QEMU and XEN is that QEMU is like an ordinary virtualization software such as VirtualBox, VMWare Workstation etc. XEN is a system that is being loaded before and behind all operating systems on the platform, so even the “regular” operating system actually runs in a virtual machine. For general purpose computers, or phones, QEMU is the coice. But if one would like to build a Xennet-dedicated machines, they might prefer XEN. XEN also has some support for GPGPU.
+### Why QEMU/XEN?
 
-    Decentralized Organizations over Xennet
-    =======================================
+QEMU and XEN are both very mature virtualization open source projects. They are packaged on most Linux distributions. QEMU has the advantage that it can be ran on almost any platform, since it supports plain user-space emulation. One can even run Windows over Android using QEMU.
+
+The main difference between QEMU and XEN is that QEMU is like an ordinary virtualization software such as VirtualBox, VMWare Workstation etc. XEN is a system that is being loaded before and behind all operating systems on the platform, so even the “regular” operating system actually runs in a virtual machine. For general purpose computers, or phones, QEMU is the coice. But if one would like to build a Xennet-dedicated machines, they might prefer XEN. XEN also has some support for GPGPU.
+
+Decentralized Organizations over Xennet
+=======================================
 
 We shall build the first applications and function as publishers on the Xennet network. All of them will be open-source. Such applications include:
 
@@ -192,3 +196,12 @@ The above numbers suggests that the serving nodes should be somewhere between 1-
 Encoding and streaming uses both CPU, RAM, Hard drive and Bandwidth, all four in at least moderate usage.
 
 We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Xennet network, hence increasing the incentive to run a node.
+
+FAQ
+===
+
+Q: How can I make sure that the VM I hired is always online, like AWS assure to me?
+A: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
+
+Q: Is it like MaidSafe?
+A: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
