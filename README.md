@@ -1,4 +1,4 @@
-Xennet RFC {#xennet-rfc .unnumbered}
+Xennet RFC
 ==========
 
 Ohad Asor
