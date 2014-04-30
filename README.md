@@ -27,7 +27,7 @@ We would like to thank Mr. Alon Peleg for his significant contribution to this p
 How it works
 ------------
 
-One would naturally require the computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Xennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, implied&external reputation and more as described below.
+One would naturally require the computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Xennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, performance measurments and more as described below.
 
 We plan to create a subnet of Xennet which will allow provable computations, such as Singular Value Decomposition, NP Complete problem solving and so on.
 
