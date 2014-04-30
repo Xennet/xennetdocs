@@ -200,8 +200,10 @@ We recognize that this constellation of resourse consumption might not justify i
 FAQ
 ===
 
-Q: How can I make sure that the VM I hired is always online, like AWS assure to me?
-A: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
+**Q**: How can I make sure that the VM I hired is always online, like AWS assure to me?
 
-Q: Is it like MaidSafe?
-A: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
+**A**: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
+
+**Q**: Isn't it like MaidSafe?
+
+**A**: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
