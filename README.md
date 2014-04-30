@@ -1,13 +1,13 @@
 Warning: This document is not final by any means, and is still subject to frequent changes.
 
-    Xennet RFC
-    ==========
+Xennet RFC
+==========
 
-    Ohad Asor
+Ohad Asor
 
-    Rev.0: 28 Feb 2014
+Rev.0: 28 Feb 2014
 
-    Rev.1: 30 Apr 2014
+Rev.1: 30 Apr 2014
 
 We present Xennet (pronounced “Zennet”), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software.
 
