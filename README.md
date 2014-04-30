@@ -1,3 +1,5 @@
+Warning: This document is not final by any means, and is still subject to frequent changes.
+
 Xennet RFC
 ==========
 
