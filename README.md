@@ -18,6 +18,8 @@ Generally speaking, Xennet is a Distributed Application (DA) letting **publisher
 
 The Xennet Foundation will implement and support the Xennet client, together with bringing into the market new products relying on Xennet, such as deecntralized video portal, decentralized search engine, short- and long-term supercomputing for companies and researchers, and many others. Our vision is that anyone on earth who owns a computing device (from a smartphone to a server farm) to be able to sell their unused computing resources. One cannot exaggerate regarding the impact of such a network on global energy consumption, global fortune distribution, accessibility of single thinkers and developers to rare computing powers, the amount of new possibilities of decentralized solution based on a virualization network, and much more.
 
+The client will be splitted to xennetd and xennet-qt, just like Bitcoin. xennetd will function as a code library, allowing new applications to use Xennet's features from their code.
+
 XenShares will be issues to the investors of the project. Fundraising over Mastercoin is considered. The Xennet Foundation will divide its revenues as dividends to the shareholders.
 
 We would like to thank Mr. Alon Peleg for his significant contribution to this project, and the Israeli Facebook Bitcoin community for their Q&A about Xennet.
@@ -170,6 +172,12 @@ Searching, browsing and streaming videos will be done using Kademlia algorithm. 
 4.  If the local node has free space to use, it accepts more (e.g. twice) parts than it shares.
 
 The client will support browsing and searching for videos using the Kademlia protocol. Streaming will begin with establishing a connection again using the Kademlia protocol, but the client will implement encoding rather done plane streaming.
+
+This network will allow not only video services, but distributed storage and file sharing by all means, including private and public files. The distributed filesystem will be HDFS (Hadoop). Hadoop will also manage all VMs, their storange and processing (encoding), taking into account their availiability, capacity and so on. Hadoop is the leading product on this field (fully open source). A proof of concept of Hadoop based streaming and encoding can be found on the [HAVS](http://ijarcet.org/wp-content/uploads/IJARCET-VOL-3-ISSUE-2-408-413.pdf) article.
+
+A dedicated Xentube client will be developed. This client will include xennetd, the Xennet's core, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with xennetd directly or using xennet-qt.
+
+Note that Xentube is only a single task in Xennet. In order for Xentube to function even when it is not the most profitable task, Xentube users should be forced to contribute resources to Xentube's task. This can be done by introducing another token, XentubeCoin. Other solutions may be considered (TBD)
 
 ### Resource Requirements
 
