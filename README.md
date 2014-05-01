@@ -207,3 +207,8 @@ FAQ
 **Q**: Isn't it like MaidSafe?
 
 **A**: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
+
+
+
+
+For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR
