@@ -211,4 +211,4 @@ FAQ
 
 
 
-For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR
+For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
