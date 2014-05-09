@@ -12,7 +12,7 @@ We present Xennet (pronounced "Zennet"), a Decentralized Application offering an
 
 For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
 
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents**
 
 - [Xennet RFC](#user-content-xennet-rfc)
 	- [Preface](#user-content-preface)
