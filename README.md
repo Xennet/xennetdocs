@@ -158,7 +158,7 @@ Discovery of nodes holding the desired parts is done simply by notifiying all co
 
 Searching by certain metainfo fields will be possible by the again recursive broadcasting. Each node will search its metafiles for the desired information, and if found, it may send the whole metainfo file to the requester, or just the hash of it (to the choice of the requester).
 
-## Uploading a File
+### Uploading a File
 
 The XenFS client will allow users to upload files or directories. Uploading will require creating a metainfo file, in a same way of creating a torrent file, and it may contain user-defined fields and tags, to be later searchable. 
 
@@ -168,7 +168,7 @@ Working peers charge also for downloading. Assume they are all selfish. Then nod
 
 If one has a file to store which is not popular (or even private), and still wants it to be stored, theoretically they can download it from time to time, so the hosts will not mark the part as non-profitable. We call this process *Periodic Proof of Storage* (PPS).
 
-### Proof of Storage
+#### Proof of Storage
 
 Assume host A holds a copy of 1MB of information which B uploaded and wants to be kept stored for long. So every time interval B needs a proof that the A actually holds the file, and pay the A with every successful check. We have to come up with a random test such that A will have to hold at least 1MB in order to pass the test with high probability, and B will have to store significantly less than 1MB in order to perform the test.
 
