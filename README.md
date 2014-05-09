@@ -1,7 +1,4 @@
-Warning: This document is not final by any means, and is still subject to frequent changes.
-
-Xennet RFC
-==========
+# Xennet RFC
 
 Ohad Asor
 
@@ -9,27 +6,31 @@ Rev.0: 28 Feb 2014
 
 Rev.1: 30 Apr 2014
 
-We present Xennet (pronounced “Zennet”), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software.
+Rev.2: 9 May 2014
 
-Virtualization Network
-======================
+We present Xennet (pronounced "Zennet"), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present XenFS, a distributed high-performance filesystem implemented over Xennet, and Xentube, a video streaming and distribution system built over XenFS.
 
-Generally speaking, Xennet is a Distributed Application (DA) letting **publishers** to run virtual machines on the **nodes’** hardware, and pay those nodes. A Publisher is any entity willing to hire computational resources. Nodes together form a giant cloud. The product will consist of a single Client software. All fully GNU GPL’d and decentralized.
+For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
+
+## Preface
+
+Generally speaking, Xennet is a Distributed Application (DA) letting **publishers** to run virtual machines on the **nodes'** hardware, and pay those nodes. A Publisher is any entity willing to hire computational resources. Nodes together form a giant cloud. The product will consist of a single Client software. All open source, trust-free and decentralized.
 
 The Xennet Foundation will implement and support the Xennet client, together with bringing into the market new products relying on Xennet, such as deecntralized video portal, decentralized search engine, short- and long-term supercomputing for companies and researchers, and many others. Our vision is that anyone on earth who owns a computing device (from a smartphone to a server farm) to be able to sell their unused computing resources. One cannot exaggerate regarding the impact of such a network on global energy consumption, global fortune distribution, accessibility of single thinkers and developers to rare computing powers, the amount of new possibilities of decentralized solution based on a virualization network, and much more.
 
-The client will be splitted to xennetd and xennet-qt, just like Bitcoin. xennetd will function as a code library, allowing new applications to use Xennet's features from their code.
+The client will be splitted to xennetd and xennet-qt, like in Bitcoin. The design consists of a blockchain, again similarly to Bitcoin.
 
-XenShares will be issues to the investors of the project. Fundraising over Mastercoin is considered. The Xennet Foundation will divide its revenues as dividends to the shareholders.
+The underlying cryptocurrency of the Xennet and its applications ecosystem is called Xencoin. It will be very much Bitcoin like, except for a few additional features. The Xennet foundation is intending to fund the development via a premine of Xencoins.
 
 We would like to thank Mr. Alon Peleg for his significant contribution to this project, and the Israeli Facebook Bitcoin community for their Q&A about Xennet.
 
-How it works
-------------
+## Architecture
 
-One would naturally require the computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Xennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, performance measurments and more as described below.
+### No POW
 
-We plan to create a subnet of Xennet which will allow provable computations, such as Singular Value Decomposition, NP Complete problem solving and so on.
+One would naturally require computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Xennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, performance measurments and more as described below.
+
+In future, we plan to create a subnet of Xennet which will allow provable computations, such as Singular Value Decomposition, NP Complete problem solving and so on.
 
 ### Main Flow 
 
@@ -37,33 +38,31 @@ The main flow can be summarized as:
 
 1.  Publisher and Node both mine their identity (see Identity Mining below).
 
-2.  Publisher broadcasts a task transaction.
+2.  Publisher broadcasts a task announcement.
 
-3.  Node considers the offer. If accepted, connects via SSH to the IP specified within the task transaction.
+3.  Node considers the offer. If accepted, connects via SSH to the IP specified within the task announcement.
 
 4.  The SSH connection creates a tunnel which gives the publisher another pipe in which they gain control over the virtual machine.
 
-5.  **Negotiation step** is taking place.
+5.  The SSH pipe will be used from now on to the Rapidly-adjusted Micropayment Algorithm, as described here: <https://en.bitcoin.it/wiki/Contracts#Example_7:_Rapidly-adjusted_.28micro.29payments_to_a_pre-determined_party>
 
-6.  The SSH pipe will be used from now on to the Rapidly-adjusted Micropayment Algorithm (RAMA), as described here: <https://en.bitcoin.it/wiki/Contracts#Example_7:_Rapidly-adjusted_.28micro.29payments_to_a_pre-determined_party>
+6.  Now the Publisher can use the VM for their needs while continuously paying the node.
 
-7.  Now the Publisher can use the VM for their needs while continuously paying the node.
+### Xennet Blockchain
 
-### Negotiation Step
+On Xennet implementation, unlike Bitcoin's one, we allow transactions without any output, and we call them *Announcements*. Announcements will have a pruning timeout field, allows them to be pruned from the blockchain after a given number of blocks.
 
-After the tunneled SSH pipe is created, Publisher benchmarks the VM, calculates the rates (payment per 1GB RAM, 1GHz CPU, 1GB Bandwidth, 1GB Persistent/Temporary storage etc. ) it agrees to pay per hour (or a fraction of it), and sends the **proposal transaction **(signed with the node’s public keys) to the node, by broadcasting it (non-presistently using prunable dust transaction) over the Xennet network.
+The Xennet blockchain will be used both to Xencoin ledger, just like Bitcoin, and for broadcasting announcements which triggers the operation of the Xennet network.
 
-The node’s Xennet client will automatically (in a widely configurable and overridable way) consider the proposal, based on other proposals and its own benchmark. If the node discards the proposal, it just closes the SSH connection gracefully.
-
-Since the performance of the VM is changing over time, payouts might be changed silently according to the publisher’s calculation. The Xennet client will monitor the system loads and verify that those changes are within some reasonable confidence interval.
+We consider using a Myriadcoin-like mining algorithm, which allows mining with various hashing functions, each with a separate difficulty parameter, making it profitable for all kinds of mining hardware such as CPU, GPU or ASIC. To avoid misunderstanding, mining is for the sake of approving transactions and maintaining the blockchain. It has nothing to do with the computing resources Xennet nodes offering to publishers.
 
 ### Task Details
 
-The **task transaction** data includes:
+The **task announcement** data includes:
 
 1.  Task ID.
 
-2.  Node’s Virtual Machine (VM) requirements (all optional):
+2.  Node's Virtual Machine (VM) requirements (all optional):
 
     1.  Operating System (OS), typically thin distributions such as DSL (Damn Small linux), OpenWRT etc., to save resources. Multiple choices are possible (letting the node choose from a list).
 
@@ -71,9 +70,9 @@ The **task transaction** data includes:
 
     3.  Minimal storage (disk space) and performance.
 
-    4.  Size of persistant storage. This will be saved locally by the node and mounted to the VM. Publisher can announce that they deactivate all task’s or specific node’s (identified by address) persistant storage, and cease from paying for it.
+    4.  Size of persistant storage. This will be saved locally by the node and mounted to the VM. Publisher can announce that they deactivate all task's or specific node's (identified by address) persistant storage, and cease from paying for it.
 
-    5.  Number of cores with how much clock frequency for each (multiple choice). Similar to AWS’ Computing Units.
+    5.  Number of cores with how much clock frequency for each (multiple choice). Similar to AWS' Computing Units.
 
     6.  Memory per core and memory speed.
 
@@ -83,34 +82,151 @@ The **task transaction** data includes:
 
 5.  Preferred lease time (range).
 
-6.  Payout interval. The publisher announces they will pay every X seconds. This points to a tradeoff between publisher’s trust, node’s trust and transaction fees. This value can be negative, meaning the publisher will pre-pay the nodes.
+6.  Payout interval. The publisher announces they will pay every X seconds. This points to a tradeoff between publisher's trust, node's trust and transaction fees. This value can be negative, meaning the publisher will pre-pay the nodes.
 
 7.  Rate per part. Publisher will set payment for each MB of memory, GHz of computing and so on. The publisher can offer any price.
 
 8.  Nonce. See Transaction Proof-of-Work below.
 
-9.  Time for proposal to be accepted. See Negotiation step.
+9.  Time for proposal to be accepted.
 
 10. Additional information. Typically a short url where the publisher can tell more if they want to.
 
-All data is embedded in a transaction in a way as in the Mastercoin protocol (dust amount transactions).
-
 ### Identities
 
-Identity mining is used to prevent flooding by dummy publishers or nodes. For the network to respect a published task or an accepted task, the relevant transactions should contain an ID of the publisher or node. This cannot be any ID, but has to have a certain structure that proves that the creation of this ID consumed significant computing resources. Namely, the hash of the ID should be lower than a Target, computed from the Difficulty, exactly like in Bitcoin. The Difficulty mechanism is needed in order to take into account Moore’s law and so on.
+Identity mining is used to prevent flooding by dummy publishers or nodes. For the network to respect a published task or an accepted task, the relevant transactions should contain an ID of the publisher or node. This cannot be any ID, but has to have a certain structure that proves that the creation of this ID consumed significant computing resources. Namely, the hash of the ID should be lower than a Target, computed from the Difficulty, exactly like in Bitcoin. The Difficulty mechanism is needed in order to take into account Moore's law and so on.
 
 Such identity mining is implemented on other projects like [Keyhotee](https://github.com/InvictusInnovations/keyhotee) and [Bitmessage](https://github.com/Bitmessage/PyBitmessage).
 
 ### Transaction Proof-of-Work
 
-Another mechanism to avoid flooding is requiring every task transaction and acceptance transaction to include some POW, by targeted-hashing as described in Identity Mining subsection above. The transaction will contain a nonce (like it Bitcoin’s mining algorithm) to be modified until the transaction’s hash is low enough. In contrary to Identity Mining, both the publisher and the node can select what is their hash target, hence increase or decrease the amount of work they require in order to accept the other party’s task or acceptance, therefore another mean of controlling the trust between the parties.
+Another mechanism to avoid flooding is requiring every task transaction and acceptance transaction to include some POW, by targeted-hashing as described in Identity Mining subsection above. The transaction will contain a nonce (like it Bitcoin's mining algorithm) to be modified until the transaction's hash is low enough. In contrary to Identity Mining, both the publisher and the node can select what is their hash target, hence increase or decrease the amount of work they require in order to accept the other party's task or acceptance, therefore another mean of controlling the trust between the parties.
 
 As can be extracted from the above, the Xennet network has four different difficulty parameters: publisher and node identity mining difficulty, plus task and acceptance transactions difficulty.
 
-Robustness and Extra Features
------------------------------
+## XenFS
 
-1.  In case of a disconnection, it is the node’s responsibility to reconnect and rebuild the tunnel. The Xennet client will handle the connection monitoring and restoration. Conversly, the publisher can run a reconnection daemon on the virtual machine. In case such as power failure, the Xennet client will try to re-run the VMs with persistant storage at the expence of the node’s (unless the publisher ordered a persistent storage).
+XenFS is a distributed filesystem to be used across developments of Xennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes using the Mitosis algorithm, to be presented below.
+
+Nodes storing the data are getting paid only for uploading, downloading and proving storage. Uploading will charge only the cost of bandwidth. On every download, the node will charge a payment encapsulating both the download bandwidth and the cost of persistant storage. Hence, nodes are motivated to keep the most popular files. It is possible to pay Xencoins and keep arbitrary data persistant even without downloading, as we shall see below regarding periodic proof of storage.
+
+### Requirements
+
+1. **Distributed**: All data should be distributed over the network and maintained by a single client.
+
+2. **Trustless**: The network should be protected against cheating.
+
+3. **Fair**: Each participant will pay for the services they consume, or get paid by giving services, and will have an incentive to participate.
+
+4. **Storage**: Allow storing files over the network.
+
+5. **Persistency**: Disappearance or corruption of files should have a very low probability.
+
+6. **Fast**: File retrieval should have low latency.
+
+7. **Streaming**: The network should be strong enough to support HD video streaming.
+
+8. **Standardized**: The network should support common file retrieval protocols, such as BitTorrent, and mounting folders locally.
+
+### Architecture
+
+The xenfsd executable will be deployed with xennetd and it will be its only window to the outside world.
+
+XenFS will work with nodes running slim POSIX VMs, typically FreeBSD. For the simplicity of implementation, debugging, monitoring and future development, we chose to implement XenFS with plain bash commands.
+
+#### Hashed Elements
+
+Elements are either parts or metainfo files. They are stored on nodes with their filenames being their SHA1 hash, which is Bitorrent compatible.
+
+**Parts** Each node will store parts of files. Each part may be of different size, typically 256KB, and will be stored as a single file. The filename will be the SHA1 hash of the part's content, as in the bittorrent standard.
+
+**Metainfo** The parts with their hashes are meaningless unless one has the information as in the torrent file, namely, the original filenames, attributes and directory structure of the files encapsulated on the torrent file, the number of parts and their hashes. Hence each part should be mapped to a torrent file. At the scope of XenFS, we call this file a *metainfo* file, which is just like a torrent file, but without a tracker URL. The metainfo files will be again saved with their hash as their filenames.
+
+#### Circuits
+
+When xennetd is launched, it discovers peers for the sake of downloading the blockchain and broadcasting transactions, just like Bitcoin's bootstrap. We call those peers the *Blockchain Peers*. When xenfsd is launched, it should initiate a xennet connection with other nodes participating in the XenFS network, since it is planning to hire services from them (storage, download etc.). Such peers will be called the *Working Peers*. The set of all working peers of a specific node form the node's *circuit*.
+
+
+To bootstrap XenFS with working peers, the client broadcasts a standard Xennet task announcement, with default XenFS or user-custom properties. The Xennet nodes accepting this task are the initial working peers of XenFS. 
+
+
+When a large file is downloaded, or with applications such as video streaming, the XenFS client will initiate a connection with working peers holding the desired file parts. Until this finishes, the existing working peers transfer the parts by recursively requesting them from their own working peers.
+
+#### Discovery
+
+Discovery of nodes holding the desired parts is done simply by notifiying all connected peers that such part is inquired. The request contains the hash of the desired part, and the IP address of the requiring node (one may consider a flavour of XenFS over OpenVPN). Once the peers received the request, they recursively pass it to their own peers. The stopping condition is when the request is arrived twice within a reasonable amount of time (say 1min). The part will be downloaded from the nodes that responded first, since it makes sense to assume they are the most available ones, in terms of load and latency.
+
+Searching by certain metainfo fields will be possible by the again recursive broadcasting. Each node will search its metafiles for the desired information, and if found, it may send the whole metainfo file to the requester, or just the hash of it (to the choice of the requester).
+
+## Uploading a File
+
+The XenFS client will allow users to upload files or directories. Uploading will require creating a metainfo file, in a same way of creating a torrent file, and it may contain user-defined fields and tags, to be later searchable. 
+
+Uploading initiates a job off-block (in front of the existing circuit) for uploading them the parts of the file. It is the user's responsibility, and will be implemented on the client, to spread the parts between various nodes with several copies. The uploader will of course have to pay the working peers for this work, so more copies will cost more.
+
+Working peers charge also for downloading. Assume they are all selfish. Then nodes will tend to store only the most downloadable parts, hence more profitable. 
+
+If one has a file to store which is not popular (or even private), and still wants it to be stored, theoretically they can download it from time to time, so the hosts will not mark the part as non-profitable. We call this process *Periodic Proof of Storage* (PPS).
+
+### Proof of Storage
+
+Assume host A holds a copy of 1MB of information which B uploaded and wants to be kept stored for long. So every time interval B needs a proof that the A actually holds the file, and pay the A with every successful check. We have to come up with a random test such that A will have to hold at least 1MB in order to pass the test with high probability, and B will have to store significantly less than 1MB in order to perform the test.
+
+The proposed solution is as follows. Before uploading, B hashes the file with a random salt which are two bytes appended to the file, keeping its original size plus two but its content is garbled. It selects 32 random bits from the hashed file, and stores them. B repeats this process for 32 different random salts. This will result with 1024 bits and 32 salts, the bit location consists of 20 bits (1M=2^20), totalling in (1024+20)/8B+2x64+20/8=259B. We call this information the *private checksum*.
+
+On every interval of time, the B sends A a random pair of bit number and salt. We call this a *checkpoint*. A does not know the private checksum of B, therefore has to keep the whole file in order to give a correct answer. It can guess the answer and be right with probability 1/2. Assume we would like a probability of 1 over 4096 that A will not cheat. So at the 1024-log_{2}4096=1024-12=1012 B will download the whole file, and create a new private checksum.
+
+On every checkpoint, B will have to give A an updated transaction (like in the micropayment protocol) with the storage fee up until now.
+
+The initiation of the PPS process is as follows. Timeout-prunable task announcement is initiated by B announcing the hash of the metainfo file to be verified. Nodes storing such parts will connect to B and begin the PPS process.
+
+### Additional Features
+
+The XenFS client will allow storing and retrieving files or folders encrypted with the user's private key. This allows pivate data to be stored securely.
+
+Bitorrent interfacce implementation is straight-forward. The metainfo file is appended with a tracker field, which points to localhost to a port xenfsd listens on, seemlessly serves any standard Bitorrent client.
+
+## Xentube
+
+Xentube is a video portal implemented over XenFS and Xennet, with parameterization, configuration and tools allowing a distributed video streaming and encoding service, without the average user having to deal with Xencoins or even know about them.
+
+A dedicated Xentube client will be developed. This client will include xennetd and xenfsd, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with xennetd directly or using xennet-qt, as well as for xenfsd.
+
+The video uploading task is the same as in XenFS, with an extra operation. Each video will be encoded into various common resolutions, to allow low-bandwidth streaming or lowering the resolution for i.e. handheld devides. The Xentube client will publish such a task of uploading and encoding with appropriate parameters, to be discussed later.
+
+The actual player to be used for watching videos can be any standard Bitorrent player such as Popcorn TV or XMBC.
+
+The Xentube client will be accessible via a web browser pointed to localhost. Xentube will implement a web application allowing users to browse, search, tag and upload content, as well as downloading or streaming with torrent magnet links.
+
+### Resource Requirements
+
+We cannot give a good estimation of needed circuit size until we make experiments on the network's implementation. But we can take several numbers as a rule of thumb as from the table [here](https://support.google.com/youtube/answer/2853702?hl=en).
+
+Assume we need 16GHz and 32GB RAM in order to encode video in realtime with resolution 480p, as used in the article at http://ijarcet.org/wp-content/uploads/IJARCET-VOL-3-ISSUE-2-408-413.pdf. Average user upload rate is around 100Kbps. Encoded videos will be kept for several days since they last have been watched, in order to avoid duplicated work.
+
+The above numbers suggests that the serving nodes should be somewhere between 1-100 per video. When impossible, lower resolutions will apply. Note that the resolution will be selected according to the playing device, i.e. when mobile phone is detected, resolution is lowered. At the worst case, buffering will take place.
+
+Encoding and streaming uses both CPU, RAM, Hard drive and Bandwidth, all four in at least moderate usage.
+
+We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Xennet and XenFS network, hence increasing the incentive to run a node.
+
+As we described, Xentube is mainly a fine-tuned XenFS with additional features. This fine-tuning of the parameters is yet to be well considered.
+
+## FAQ
+
+**Q**: How can I make sure that the VM I hired is always online, like AWS assure to me?
+
+**A**: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
+
+**Q**: Isn't it like MaidSafe?
+
+**A**: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
+
+## Appendix
+
+### Xennet Robustness and Extra Features
+
+1.  In case of a disconnection, it is the node's responsibility to reconnect and rebuild the tunnel. The Xennet client will handle the connection monitoring and restoration. Conversly, the publisher can run a reconnection daemon on the virtual machine. In case such as power failure, the Xennet client will try to re-run the VMs with persistant storage at the expence of the node's (unless the publisher ordered a persistent storage).
 
 2.  The Xennet client will handle the VMs launching, closing and configuring. It is planned to support both QEMU (for common computers and devices) and XEN (for dedicated Xennet racks or any other reason).
 
@@ -126,14 +242,13 @@ Robustness and Extra Features
 
 8.  Default (thin) OS images will be supplied with the Xennet client. The Xennet client will also offer to automatically install and configure QEMU.
 
-Technical Notes
----------------
+### Xennet Technical Notes
 
-1.  The Xennet client will follow the payouts and act as requested by the user in case of no payout (or no payout yet). The publisher’s responsibility is to implement such a system themselves, selecting which nodes to work with and for how much.
+1.  The Xennet client will follow the payouts and act as requested by the user in case of no payout (or no payout yet). The publisher's responsibility is to implement such a system themselves, selecting which nodes to work with and for how much.
 
 2.  For extra-safety, when using QEMU in a general-purpose machine, it can be ran on a separate user inside a `jail`.
 
-3.  The task and acceptance transaction sizes should not exceed several dozens or a few hundreds of bytes, hence adequate to the Bitcoin’s blockchain.
+3.  The task and acceptance announcements sizes should not exceed several dozens or a few hundreds of bytes, hence adequate to the Bitcoin's blockchain.
 
 ### Why QEMU/XEN?
 
@@ -141,74 +256,26 @@ QEMU and XEN are both very mature virtualization open source projects. They are 
 
 The main difference between QEMU and XEN is that QEMU is like an ordinary virtualization software such as VirtualBox, VMWare Workstation etc. XEN is a system that is being loaded before and behind all operating systems on the platform, so even the “regular” operating system actually runs in a virtual machine. For general purpose computers, or phones, QEMU is the coice. But if one would like to build a Xennet-dedicated machines, they might prefer XEN. XEN also has some support for GPGPU.
 
-Decentralized Organizations over Xennet
-=======================================
+#### TBD
 
-We shall build the first applications and function as publishers on the Xennet network. All of them will be open-source. Such applications include:
+* Maybe POS to avoid instant redeeming? Should converge to the risk. Can it be controlled the network?
+
+### Decentralized Organizations over Xennet
+
+We shall build the first applications and function as publishers on the Xennet network. All of them will be open-source. Such applications may include:
 
 1.  CPU mining. Nodes will run various cryptocurrency miners and this will fund their payments.
 
-2.  Peer-to-peer storage-only network, using Hadoop’s HDFS. Backup your data safely. Free up to some limit of size, paid afterwards. We might rent servers at our expense in order to help this storage network grow safely.
+2.  Decentralized P2P World Wide Web. All nodes will be connected via OpenVPN or a modified TOR, allowing web hosting and serving websites on custom domains. May integrate or borrow ideas from I2P and Namecoin.
 
-3.  Decentralized P2P World Wide Web. All nodes will be connected via OpenVPN or a modified TOR, allowing web hosting and serving websites on custom domains. May integrate or borrow ideas from I2P and Namecoin.
+3.  Decentralized P2P mail servers.
 
-4.  Decentralized P2P mail servers.
+4.  Decentralized P2P DNS (better avoid DNS poisoning? Maybe adopt the new DNS standard candidates?)
 
-5.  Decentralized P2P DNS (better avoid DNS poisoning? Maybe adopt the new DNS standard candidates?)
+5.  Decentralized P2P search engine. Nodes shall have vast scraping abilities and fast queries. We can employ tools such as by Apache foundation and implement a search engine of our own. It will monetize itself via advertisements, just like Google. But it will be preferred on Google in a way that governments and politics can't stop it (like in China), no one moderates the content, no one will track anyone's usage, statistics will be freely available (this has a huge impact: just imagine the worth of the information Google has in hands, means - what people look for), Deep web will be indexed, maybe history of websites will be kept as well.
 
-6.  Decentralized P2P search engine. Nodes shall have vast scraping abilities and fast queries. We can employ tools such as by Apache foundation and implement a search engine of our own. It will monetize itself via advertisements, just like Google. But it will be preferred on Google in a way that governments and politics can’t stop it (like in China), no one moderates the content, no one will track anyone’s usage, statistics will be freely available (this has a huge impact: just imagine the worth of the information Google has in hands, means - what people look for), Deep web will be indexed, maybe history of websites will be kept as well.
+6. XenFS, Xentube.
 
-The first product deserves a separate section:
+7. e-books repository.
 
-Xentube
--------
-
-We shall implement Xentube, a P2P decentralized network for video storing, encoding and streaming, over Xennet.
-
-Searching, browsing and streaming videos will be done using Kademlia algorithm. Uploading videos will use the Mitosis algorithm, in which hereby present. The Mitosis algorithm is used to spread the data files among as much clients as possible, and maintain several copies of each block. It acts as follows:
-
-1.  Randomally exchange file parts with connected peers. Get parts from the peer, give parts to the peer, and delete the given parts. Note that the randomally selected parts can duplicate themselves.
-
-2.  Exchanging is done continuously with a fixed bandwidth per connected peer (e.g. 1KB/sec).
-
-3.  Each node remembers for a certain about of time (e.g. 1 day) which lets it route requests for the parts it recently held to the other node.
-
-4.  If the local node has free space to use, it accepts more (e.g. twice) parts than it shares.
-
-The client will support browsing and searching for videos using the Kademlia protocol. Streaming will begin with establishing a connection again using the Kademlia protocol, but the client will implement encoding rather done plane streaming.
-
-This network will allow not only video services, but distributed storage and file sharing by all means, including private and public files. The distributed filesystem will be HDFS (Hadoop). Hadoop will also manage all VMs, their storange and processing (encoding), taking into account their availiability, capacity and so on. Hadoop is the leading product on this field (fully open source). A proof of concept of Hadoop based streaming and encoding can be found on the [HAVS](http://ijarcet.org/wp-content/uploads/IJARCET-VOL-3-ISSUE-2-408-413.pdf) article.
-
-A dedicated Xentube client will be developed. This client will include xennetd, the Xennet's core, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with xennetd directly or using xennet-qt.
-
-Note that Xentube is only a single task in Xennet. In order for Xentube to function even when it is not the most profitable task, Xentube users should be forced to contribute resources to Xentube's task. This can be done by introducing another token, XentubeCoin. Other solutions may be considered (TBD)
-
-### Resource Requirements
-
-We cannot give a good estimation of needed cloudlet size until we make experiments on the network’s implementation. But we can take several numbers as a rule of thumb. We took the following table from [here](https://support.google.com/youtube/answer/2853702?hl=en):
-
-<span>|c|c|c|c|c|c|</span> & 240p & 360p & 480p & 720p & 1080pMaximum & 700 Kbps & 1000 Kbps & 2000 Kbps & 4000 Kbps & 6000 KbpsRecommended & 400 Kbps & 750 Kbps & 1000 Kbps & 2500 Kbps & 4500 KbpsMinimum & 300 Kbps & 400 Kbps & 500 Kbps & 1500 Kbps & 3000 Kbps
-
-Assume we need 16GHz and 32GB RAM in order to encode video in realtime with resolution 480p, as used in the article at http://ijarcet.org/wp-content/uploads/IJARCET-VOL-3-ISSUE-2-408-413.pdf. Average user upload rate is around 100Kbps. Encoded videos will be kept for several days since they last have been watched, in order to avoid duplicated work.
-
-The above numbers suggests that the serving nodes should be somewhere between 1-100 per video. When impossible, lower resolutions will apply. Note that the resolution will be selected according to the playing device, i.e. when mobile phone is detected, resolution is lowered. At the worst case, buffering will take place.
-
-Encoding and streaming uses both CPU, RAM, Hard drive and Bandwidth, all four in at least moderate usage.
-
-We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Xennet network, hence increasing the incentive to run a node.
-
-FAQ
-===
-
-**Q**: How can I make sure that the VM I hired is always online, like AWS assure to me?
-
-**A**: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
-
-**Q**: Isn't it like MaidSafe?
-
-**A**: No. Maidsafe does not allow distributed computing. And even if so, it will be via a JVM, which is inherently dozens or hundreds inefficient than native VM.
-
-
-
-
-For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
+Over the next sections we present two applications of Xennet built one of top another: XenFS and Xentube. XenFS is a distributed file system which is torrent compatible. Xentube relies on XenFS and allows media encoding and streaming, playable with any torrent video player. Such an open source player might be packaged with Xentube.
