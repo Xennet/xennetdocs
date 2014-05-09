@@ -12,6 +12,36 @@ We present Xennet (pronounced "Zennet"), a Decentralized Application offering an
 
 For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
 
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Xennet RFC](#user-content-xennet-rfc)
+	- [Preface](#user-content-preface)
+	- [Architecture](#user-content-architecture)
+		- [No POW](#user-content-no-pow)
+		- [Main Flow](#user-content-main-flow)
+		- [Xennet Blockchain](#user-content-xennet-blockchain)
+		- [Task Details](#user-content-task-details)
+		- [Identities](#user-content-identities)
+		- [Transaction Proof-of-Work](#user-content-transaction-proof-of-work)
+	- [XenFS](#user-content-xenfs)
+		- [Requirements](#user-content-requirements)
+		- [Architecture](#user-content-architecture-1)
+			- [Hashed Elements](#user-content-hashed-elements)
+			- [Circuits](#user-content-circuits)
+			- [Discovery](#user-content-discovery)
+		- [Uploading a File](#user-content-uploading-a-file)
+			- [Proof of Storage](#user-content-proof-of-storage)
+		- [Additional Features](#user-content-additional-features)
+	- [Xentube](#user-content-xentube)
+		- [Resource Requirements](#user-content-resource-requirements)
+	- [FAQ](#user-content-faq)
+	- [Appendix](#user-content-appendix)
+		- [Xennet Robustness and Extra Features](#user-content-xennet-robustness-and-extra-features)
+		- [Xennet Technical Notes](#user-content-xennet-technical-notes)
+		- [Why QEMU/XEN?](#user-content-why-qemuxen)
+			- [TBD](#user-content-tbd)
+		- [Decentralized Organizations over Xennet](#user-content-decentralized-organizations-over-xennet)
+
 ## Preface
 
 Generally speaking, Xennet is a Distributed Application (DA) letting **publishers** to run virtual machines on the **nodes'** hardware, and pay those nodes. A Publisher is any entity willing to hire computational resources. Nodes together form a giant cloud. The product will consist of a single Client software. All open source, trust-free and decentralized.
