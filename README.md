@@ -106,7 +106,7 @@ As can be extracted from the above, the Xennet network has four different diffic
 
 ## XenFS
 
-XenFS is a distributed filesystem to be used across developments of Xennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes using the Mitosis algorithm, to be presented below.
+XenFS is a distributed filesystem to be used across developments of Xennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes.
 
 Nodes storing the data are getting paid only for uploading, downloading and proving storage. Uploading will charge only the cost of bandwidth. On every download, the node will charge a payment encapsulating both the download bandwidth and the cost of persistant storage. Hence, nodes are motivated to keep the most popular files. It is possible to pay Xencoins and keep arbitrary data persistant even without downloading, as we shall see below regarding periodic proof of storage.
 
