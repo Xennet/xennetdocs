@@ -10,9 +10,10 @@ Rev.2: 9 May 2014
 
 1 Jul 2014: Note, SDD document available here https://docs.google.com/document/d/1Y-JKJtJrnGpEISgpEpGKqwmW-atg0_Uk2rJAH5YpaLc/edit?usp=sharing
 
+**Please refer to http://xennet.io for more updated information.**
+
 We present Xennet (pronounced "Zennet"), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present XenFS, a distributed high-performance filesystem implemented over Xennet, and Xentube, a video streaming and distribution system built over XenFS.
 
-For Xennet and its applications to bootstrap their development, please donate BTC to 1LsZodH5B1V3fNwoMyBgARQ1wXwzMv7SBR . We promise to use the donations for the sake of the foundation.
 
 **Table of Contents**
 
