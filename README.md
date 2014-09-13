@@ -207,7 +207,7 @@ Assume host A holds a copy of 1MB of information which B uploaded and wants to b
 
 The proposed solution is as follows. Before uploading, B hashes the file with a random salt which are two bytes appended to the file, keeping its original size plus two but its content is garbled. It selects 32 random bits from the hashed file, and stores them. B repeats this process for 32 different random salts. This will result with 1024 bits and 32 salts, the bit location consists of 20 bits (1M=2^20), totalling in (1024+20)/8B+2x64+20/8=259B. We call this information the *private checksum*.
 
-On every interval of time, the B sends A a random pair of bit number and salt. We call this a *checkpoint*. A does not know the private checksum of B, therefore has to keep the whole file in order to give a correct answer. It can guess the answer and be right with probability 1/2. Assume we would like a probability of 1 over 4096 that A will not cheat. So at the 1024-log_{2}4096=1024-12=1012 B will download the whole file, and create a new private checksum.
+On every interval of time, B sends A a random pair of bit number and salt. We call this a *checkpoint*. A does not know the private checksum of B, therefore has to keep the whole file in order to give a correct answer. It can guess the answer and be right with probability 1/2. Assume we would like a probability of 1 over 4096 that A will not cheat. So at the 1024-log_{2}4096=1024-12=1012 B will download the whole file, and create a new private checksum.
 
 On every checkpoint, B will have to give A an updated transaction (like in the micropayment protocol) with the storage fee up until now.
 
