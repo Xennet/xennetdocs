@@ -10,9 +10,9 @@ Rev.2: 9 May 2014
 
 1 Jul 2014: Note, SDD document available here https://docs.google.com/document/d/1Y-JKJtJrnGpEISgpEpGKqwmW-atg0_Uk2rJAH5YpaLc/edit?usp=sharing
 
-**Please refer to http://Zennet.io for more updated information.**
+**Please refer to http://zennet.io for more updated information.**
 
-We present Zennet, a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present XenFS, a distributed high-performance filesystem implemented over Zennet, and Xentube, a video streaming and distribution system built over XenFS.
+We present Zennet, a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present ZenFS, a distributed high-performance filesystem implemented over Zennet, and ZenTube, a video streaming and distribution system built over ZenFS.
 
 
 **Table of Contents**
@@ -26,7 +26,7 @@ We present Zennet, a Decentralized Application offering an automatic virtualizat
 		- [Task Details](#user-content-task-details)
 		- [Identities](#user-content-identities)
 		- [Transaction Proof-of-Work](#user-content-transaction-proof-of-work)
-	- [XenFS](#user-content-xenfs)
+	- [ZenFS](#user-content-ZenFS)
 		- [Requirements](#user-content-requirements)
 		- [Architecture](#user-content-architecture-1)
 			- [Hashed Elements](#user-content-hashed-elements)
@@ -35,7 +35,7 @@ We present Zennet, a Decentralized Application offering an automatic virtualizat
 		- [Uploading a File](#user-content-uploading-a-file)
 			- [Proof of Storage](#user-content-proof-of-storage)
 		- [Additional Features](#user-content-additional-features)
-	- [Xentube](#user-content-xentube)
+	- [ZenTube](#user-content-ZenTube)
 		- [Resource Requirements](#user-content-resource-requirements)
 	- [FAQ](#user-content-faq)
 	- [Appendix](#user-content-appendix)
@@ -53,7 +53,7 @@ The Zennet Foundation will implement and support the Zennet client, together wit
 
 The client will be splitted to Zennetd and Zennet-qt, like in Bitcoin. The design consists of a blockchain, again similarly to Bitcoin.
 
-The underlying cryptocurrency of the Zennet and its applications ecosystem is called Xencoin. It will be very much Bitcoin like, except for a few additional features. The Zennet foundation is intending to fund the development via a premine of Xencoins.
+The underlying cryptocurrency of the Zennet and its applications ecosystem is called Zencoin. It will be very much Bitcoin like, except for a few additional features. The Zennet foundation is intending to fund the development via a premine of Zencoins.
 
 We would like to thank Mr. Alon Peleg for his significant contribution to this project, and the Israeli Facebook Bitcoin community for their Q&A about Zennet.
 
@@ -85,7 +85,7 @@ The main flow can be summarized as:
 
 On Zennet implementation, unlike Bitcoin's one, we allow transactions without any output, and we call them *Announcements*. Announcements will have a pruning timeout field, allows them to be pruned from the blockchain after a given number of blocks.
 
-The Zennet blockchain will be used both to Xencoin ledger, just like Bitcoin, and for broadcasting announcements which triggers the operation of the Zennet network.
+The Zennet blockchain will be used both to Zencoin ledger, just like Bitcoin, and for broadcasting announcements which triggers the operation of the Zennet network.
 
 We consider using a Myriadcoin-like mining algorithm, which allows mining with various hashing functions, each with a separate difficulty parameter, making it profitable for all kinds of mining hardware such as CPU, GPU or ASIC. To avoid misunderstanding, mining is for the sake of approving transactions and maintaining the blockchain. It has nothing to do with the computing resources Zennet nodes offering to publishers.
 
@@ -137,11 +137,11 @@ Another mechanism to avoid flooding is requiring every task transaction and acce
 
 As can be extracted from the above, the Zennet network has four different difficulty parameters: publisher and node identity mining difficulty, plus task and acceptance transactions difficulty.
 
-## XenFS
+## ZenFS
 
-XenFS is a distributed filesystem to be used across developments of Zennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes.
+ZenFS is a distributed filesystem to be used across developments of Zennet foundation. Specifically, it will serve ZenTube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes.
 
-Nodes storing the data are getting paid only for uploading, downloading and proving storage. Uploading will charge only the cost of bandwidth. On every download, the node will charge a payment encapsulating both the download bandwidth and the cost of persistant storage. Hence, nodes are motivated to keep the most popular files. It is possible to pay Xencoins and keep arbitrary data persistant even without downloading, as we shall see below regarding periodic proof of storage.
+Nodes storing the data are getting paid only for uploading, downloading and proving storage. Uploading will charge only the cost of bandwidth. On every download, the node will charge a payment encapsulating both the download bandwidth and the cost of persistant storage. Hence, nodes are motivated to keep the most popular files. It is possible to pay Zencoins and keep arbitrary data persistant even without downloading, as we shall see below regarding periodic proof of storage.
 
 ### Requirements
 
@@ -163,9 +163,9 @@ Nodes storing the data are getting paid only for uploading, downloading and prov
 
 ### Architecture
 
-The xenfsd executable will be deployed with Zennetd and it will be its only window to the outside world.
+The ZenFSd executable will be deployed with Zennetd and it will be its only window to the outside world.
 
-XenFS will work with nodes running slim POSIX VMs, typically FreeBSD. For the simplicity of implementation, debugging, monitoring and future development, we chose to implement XenFS with plain bash commands.
+ZenFS will work with nodes running slim POSIX VMs, typically FreeBSD. For the simplicity of implementation, debugging, monitoring and future development, we chose to implement ZenFS with plain bash commands.
 
 #### Hashed Elements
 
@@ -173,27 +173,27 @@ Elements are either parts or metainfo files. They are stored on nodes with their
 
 **Parts** Each node will store parts of files. Each part may be of different size, typically 256KB, and will be stored as a single file. The filename will be the SHA1 hash of the part's content, as in the bittorrent standard.
 
-**Metainfo** The parts with their hashes are meaningless unless one has the information as in the torrent file, namely, the original filenames, attributes and directory structure of the files encapsulated on the torrent file, the number of parts and their hashes. Hence each part should be mapped to a torrent file. At the scope of XenFS, we call this file a *metainfo* file, which is just like a torrent file, but without a tracker URL. The metainfo files will be again saved with their hash as their filenames.
+**Metainfo** The parts with their hashes are meaningless unless one has the information as in the torrent file, namely, the original filenames, attributes and directory structure of the files encapsulated on the torrent file, the number of parts and their hashes. Hence each part should be mapped to a torrent file. At the scope of ZenFS, we call this file a *metainfo* file, which is just like a torrent file, but without a tracker URL. The metainfo files will be again saved with their hash as their filenames.
 
 #### Circuits
 
-When Zennetd is launched, it discovers peers for the sake of downloading the blockchain and broadcasting transactions, just like Bitcoin's bootstrap. We call those peers the *Blockchain Peers*. When xenfsd is launched, it should initiate a Zennet connection with other nodes participating in the XenFS network, since it is planning to hire services from them (storage, download etc.). Such peers will be called the *Working Peers*. The set of all working peers of a specific node form the node's *circuit*.
+When Zennetd is launched, it discovers peers for the sake of downloading the blockchain and broadcasting transactions, just like Bitcoin's bootstrap. We call those peers the *Blockchain Peers*. When ZenFSd is launched, it should initiate a Zennet connection with other nodes participating in the ZenFS network, since it is planning to hire services from them (storage, download etc.). Such peers will be called the *Working Peers*. The set of all working peers of a specific node form the node's *circuit*.
 
 
-To bootstrap XenFS with working peers, the client broadcasts a standard Zennet task announcement, with default XenFS or user-custom properties. The Zennet nodes accepting this task are the initial working peers of XenFS. 
+To bootstrap ZenFS with working peers, the client broadcasts a standard Zennet task announcement, with default ZenFS or user-custom properties. The Zennet nodes accepting this task are the initial working peers of ZenFS. 
 
 
-When a large file is downloaded, or with applications such as video streaming, the XenFS client will initiate a connection with working peers holding the desired file parts. Until this finishes, the existing working peers transfer the parts by recursively requesting them from their own working peers.
+When a large file is downloaded, or with applications such as video streaming, the ZenFS client will initiate a connection with working peers holding the desired file parts. Until this finishes, the existing working peers transfer the parts by recursively requesting them from their own working peers.
 
 #### Discovery
 
-Discovery of nodes holding the desired parts is done simply by notifiying all connected peers that such part is inquired. The request contains the hash of the desired part, and the IP address of the requiring node (one may consider a flavour of XenFS over OpenVPN). Once the peers received the request, they recursively pass it to their own peers. The stopping condition is when the request is arrived twice within a reasonable amount of time (say 1min). The part will be downloaded from the nodes that responded first, since it makes sense to assume they are the most available ones, in terms of load and latency.
+Discovery of nodes holding the desired parts is done simply by notifiying all connected peers that such part is inquired. The request contains the hash of the desired part, and the IP address of the requiring node (one may consider a flavour of ZenFS over OpenVPN). Once the peers received the request, they recursively pass it to their own peers. The stopping condition is when the request is arrived twice within a reasonable amount of time (say 1min). The part will be downloaded from the nodes that responded first, since it makes sense to assume they are the most available ones, in terms of load and latency.
 
 Searching by certain metainfo fields will be possible by the again recursive broadcasting. Each node will search its metafiles for the desired information, and if found, it may send the whole metainfo file to the requester, or just the hash of it (to the choice of the requester).
 
 ### Uploading a File
 
-The XenFS client will allow users to upload files or directories. Uploading will require creating a metainfo file, in a same way of creating a torrent file, and it may contain user-defined fields and tags, to be later searchable. 
+The ZenFS client will allow users to upload files or directories. Uploading will require creating a metainfo file, in a same way of creating a torrent file, and it may contain user-defined fields and tags, to be later searchable. 
 
 Uploading initiates a job off-block (in front of the existing circuit) for uploading them the parts of the file. It is the user's responsibility, and will be implemented on the client, to spread the parts between various nodes with several copies. The uploader will of course have to pay the working peers for this work, so more copies will cost more.
 
@@ -215,21 +215,21 @@ The initiation of the PPS process is as follows. Timeout-prunable task announcem
 
 ### Additional Features
 
-The XenFS client will allow storing and retrieving files or folders encrypted with the user's private key. This allows pivate data to be stored securely.
+The ZenFS client will allow storing and retrieving files or folders encrypted with the user's private key. This allows pivate data to be stored securely.
 
-Bitorrent interfacce implementation is straight-forward. The metainfo file is appended with a tracker field, which points to localhost to a port xenfsd listens on, seemlessly serves any standard Bitorrent client.
+Bitorrent interfacce implementation is straight-forward. The metainfo file is appended with a tracker field, which points to localhost to a port ZenFSd listens on, seemlessly serves any standard Bitorrent client.
 
-## Xentube
+## ZenTube
 
-Xentube is a video portal implemented over XenFS and Zennet, with parameterization, configuration and tools allowing a distributed video streaming and encoding service, without the average user having to deal with Xencoins or even know about them.
+ZenTube is a video portal implemented over ZenFS and Zennet, with parameterization, configuration and tools allowing a distributed video streaming and encoding service, without the average user having to deal with Zencoins or even know about them.
 
-A dedicated Xentube client will be developed. This client will include Zennetd and xenfsd, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with Zennetd directly or using Zennet-qt, as well as for xenfsd.
+A dedicated ZenTube client will be developed. This client will include Zennetd and ZenFSd, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with Zennetd directly or using Zennet-qt, as well as for ZenFSd.
 
-The video uploading task is the same as in XenFS, with an extra operation. Each video will be encoded into various common resolutions, to allow low-bandwidth streaming or lowering the resolution for i.e. handheld devides. The Xentube client will publish such a task of uploading and encoding with appropriate parameters, to be discussed later.
+The video uploading task is the same as in ZenFS, with an extra operation. Each video will be encoded into various common resolutions, to allow low-bandwidth streaming or lowering the resolution for i.e. handheld devides. The ZenTube client will publish such a task of uploading and encoding with appropriate parameters, to be discussed later.
 
 The actual player to be used for watching videos can be any standard Bitorrent player such as Popcorn TV or XMBC.
 
-The Xentube client will be accessible via a web browser pointed to localhost. Xentube will implement a web application allowing users to browse, search, tag and upload content, as well as downloading or streaming with torrent magnet links.
+The ZenTube client will be accessible via a web browser pointed to localhost. ZenTube will implement a web application allowing users to browse, search, tag and upload content, as well as downloading or streaming with torrent magnet links.
 
 ### Resource Requirements
 
@@ -241,9 +241,9 @@ The above numbers suggests that the serving nodes should be somewhere between 1-
 
 Encoding and streaming uses both CPU, RAM, Hard drive and Bandwidth, all four in at least moderate usage.
 
-We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Zennet and XenFS network, hence increasing the incentive to run a node.
+We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Zennet and ZenFS network, hence increasing the incentive to run a node.
 
-As we described, Xentube is mainly a fine-tuned XenFS with additional features. This fine-tuning of the parameters is yet to be well considered.
+As we described, ZenTube is mainly a fine-tuned ZenFS with additional features. This fine-tuning of the parameters is yet to be well considered.
 
 ## FAQ
 
@@ -307,8 +307,8 @@ We shall build the first applications and function as publishers on the Zennet n
 
 5.  Decentralized P2P search engine. Nodes shall have vast scraping abilities and fast queries. We can employ tools such as by Apache foundation and implement a search engine of our own. It will monetize itself via advertisements, just like Google. But it will be preferred on Google in a way that governments and politics can't stop it (like in China), no one moderates the content, no one will track anyone's usage, statistics will be freely available (this has a huge impact: just imagine the worth of the information Google has in hands, means - what people look for), Deep web will be indexed, maybe history of websites will be kept as well.
 
-6. XenFS, Xentube.
+6. ZenFS, ZenTube.
 
 7. e-books repository.
 
-Over the next sections we present two applications of Zennet built one of top another: XenFS and Xentube. XenFS is a distributed file system which is torrent compatible. Xentube relies on XenFS and allows media encoding and streaming, playable with any torrent video player. Such an open source player might be packaged with Xentube.
+Over the next sections we present two applications of Zennet built one of top another: ZenFS and ZenTube. ZenFS is a distributed file system which is torrent compatible. ZenTube relies on ZenFS and allows media encoding and streaming, playable with any torrent video player. Such an open source player might be packaged with ZenTube.
