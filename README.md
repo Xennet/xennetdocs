@@ -1,4 +1,4 @@
-# Xennet RFC
+# Zennet RFC
 
 Ohad Asor
 
@@ -10,19 +10,19 @@ Rev.2: 9 May 2014
 
 1 Jul 2014: Note, SDD document available here https://docs.google.com/document/d/1Y-JKJtJrnGpEISgpEpGKqwmW-atg0_Uk2rJAH5YpaLc/edit?usp=sharing
 
-**Please refer to http://xennet.io for more updated information.**
+**Please refer to http://Zennet.io for more updated information.**
 
-We present Xennet (pronounced "Zennet"), a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present XenFS, a distributed high-performance filesystem implemented over Xennet, and Xentube, a video streaming and distribution system built over XenFS.
+We present Zennet, a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present XenFS, a distributed high-performance filesystem implemented over Zennet, and Xentube, a video streaming and distribution system built over XenFS.
 
 
 **Table of Contents**
 
-- [Xennet RFC](#user-content-xennet-rfc)
+- [Zennet RFC](#user-content-Zennet-rfc)
 	- [Preface](#user-content-preface)
 	- [Architecture](#user-content-architecture)
 		- [No POW](#user-content-no-pow)
 		- [Main Flow](#user-content-main-flow)
-		- [Xennet Blockchain](#user-content-xennet-blockchain)
+		- [Zennet Blockchain](#user-content-Zennet-blockchain)
 		- [Task Details](#user-content-task-details)
 		- [Identities](#user-content-identities)
 		- [Transaction Proof-of-Work](#user-content-transaction-proof-of-work)
@@ -39,31 +39,31 @@ We present Xennet (pronounced "Zennet"), a Decentralized Application offering an
 		- [Resource Requirements](#user-content-resource-requirements)
 	- [FAQ](#user-content-faq)
 	- [Appendix](#user-content-appendix)
-		- [Xennet Robustness and Extra Features](#user-content-xennet-robustness-and-extra-features)
-		- [Xennet Technical Notes](#user-content-xennet-technical-notes)
+		- [Zennet Robustness and Extra Features](#user-content-Zennet-robustness-and-extra-features)
+		- [Zennet Technical Notes](#user-content-Zennet-technical-notes)
 		- [Why QEMU/XEN?](#user-content-why-qemuxen)
 			- [TBD](#user-content-tbd)
-		- [Decentralized Organizations over Xennet](#user-content-decentralized-organizations-over-xennet)
+		- [Decentralized Organizations over Zennet](#user-content-decentralized-organizations-over-Zennet)
 
 ## Preface
 
-Generally speaking, Xennet is a Distributed Application (DA) letting **publishers** to run virtual machines on the **nodes'** hardware, and pay those nodes. A Publisher is any entity willing to hire computational resources. Nodes together form a giant cloud. The product will consist of a single Client software. All open source, trust-free and decentralized.
+Generally speaking, Zennet is a Distributed Application (DA) letting **publishers** to run virtual machines on the **nodes'** hardware, and pay those nodes. A Publisher is any entity willing to hire computational resources. Nodes together form a giant cloud. The product will consist of a single Client software. All open source, trust-free and decentralized.
 
-The Xennet Foundation will implement and support the Xennet client, together with bringing into the market new products relying on Xennet, such as deecntralized video portal, decentralized search engine, short- and long-term supercomputing for companies and researchers, and many others. Our vision is that anyone on earth who owns a computing device (from a smartphone to a server farm) to be able to sell their unused computing resources. One cannot exaggerate regarding the impact of such a network on global energy consumption, global fortune distribution, accessibility of single thinkers and developers to rare computing powers, the amount of new possibilities of decentralized solution based on a virualization network, and much more.
+The Zennet Foundation will implement and support the Zennet client, together with bringing into the market new products relying on Zennet, such as deecntralized video portal, decentralized search engine, short- and long-term supercomputing for companies and researchers, and many others. Our vision is that anyone on earth who owns a computing device (from a smartphone to a server farm) to be able to sell their unused computing resources. One cannot exaggerate regarding the impact of such a network on global energy consumption, global fortune distribution, accessibility of single thinkers and developers to rare computing powers, the amount of new possibilities of decentralized solution based on a virualization network, and much more.
 
-The client will be splitted to xennetd and xennet-qt, like in Bitcoin. The design consists of a blockchain, again similarly to Bitcoin.
+The client will be splitted to Zennetd and Zennet-qt, like in Bitcoin. The design consists of a blockchain, again similarly to Bitcoin.
 
-The underlying cryptocurrency of the Xennet and its applications ecosystem is called Xencoin. It will be very much Bitcoin like, except for a few additional features. The Xennet foundation is intending to fund the development via a premine of Xencoins.
+The underlying cryptocurrency of the Zennet and its applications ecosystem is called Xencoin. It will be very much Bitcoin like, except for a few additional features. The Zennet foundation is intending to fund the development via a premine of Xencoins.
 
-We would like to thank Mr. Alon Peleg for his significant contribution to this project, and the Israeli Facebook Bitcoin community for their Q&A about Xennet.
+We would like to thank Mr. Alon Peleg for his significant contribution to this project, and the Israeli Facebook Bitcoin community for their Q&A about Zennet.
 
 ## Architecture
 
 ### No POW
 
-One would naturally require computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Xennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, performance measurments and more as described below.
+One would naturally require computing jobs to be provable, in a proof-of-work manner, but this is impossible when we deal with generic computing tasks. In Zennet, different mechanisms are used to prevent abuse, namely proof-of-identity, short payment intervals, performance measurments and more as described below.
 
-In future, we plan to create a subnet of Xennet which will allow provable computations, such as Singular Value Decomposition, NP Complete problem solving and so on.
+In future, we plan to create a subnet of Zennet which will allow provable computations, such as Singular Value Decomposition, NP Complete problem solving and so on.
 
 ### Main Flow 
 
@@ -81,13 +81,13 @@ The main flow can be summarized as:
 
 6.  Now the Publisher can use the VM for their needs while continuously paying the node.
 
-### Xennet Blockchain
+### Zennet Blockchain
 
-On Xennet implementation, unlike Bitcoin's one, we allow transactions without any output, and we call them *Announcements*. Announcements will have a pruning timeout field, allows them to be pruned from the blockchain after a given number of blocks.
+On Zennet implementation, unlike Bitcoin's one, we allow transactions without any output, and we call them *Announcements*. Announcements will have a pruning timeout field, allows them to be pruned from the blockchain after a given number of blocks.
 
-The Xennet blockchain will be used both to Xencoin ledger, just like Bitcoin, and for broadcasting announcements which triggers the operation of the Xennet network.
+The Zennet blockchain will be used both to Xencoin ledger, just like Bitcoin, and for broadcasting announcements which triggers the operation of the Zennet network.
 
-We consider using a Myriadcoin-like mining algorithm, which allows mining with various hashing functions, each with a separate difficulty parameter, making it profitable for all kinds of mining hardware such as CPU, GPU or ASIC. To avoid misunderstanding, mining is for the sake of approving transactions and maintaining the blockchain. It has nothing to do with the computing resources Xennet nodes offering to publishers.
+We consider using a Myriadcoin-like mining algorithm, which allows mining with various hashing functions, each with a separate difficulty parameter, making it profitable for all kinds of mining hardware such as CPU, GPU or ASIC. To avoid misunderstanding, mining is for the sake of approving transactions and maintaining the blockchain. It has nothing to do with the computing resources Zennet nodes offering to publishers.
 
 ### Task Details
 
@@ -135,11 +135,11 @@ Such identity mining is implemented on other projects like [Keyhotee](https://gi
 
 Another mechanism to avoid flooding is requiring every task transaction and acceptance transaction to include some POW, by targeted-hashing as described in Identity Mining subsection above. The transaction will contain a nonce (like it Bitcoin's mining algorithm) to be modified until the transaction's hash is low enough. In contrary to Identity Mining, both the publisher and the node can select what is their hash target, hence increase or decrease the amount of work they require in order to accept the other party's task or acceptance, therefore another mean of controlling the trust between the parties.
 
-As can be extracted from the above, the Xennet network has four different difficulty parameters: publisher and node identity mining difficulty, plus task and acceptance transactions difficulty.
+As can be extracted from the above, the Zennet network has four different difficulty parameters: publisher and node identity mining difficulty, plus task and acceptance transactions difficulty.
 
 ## XenFS
 
-XenFS is a distributed filesystem to be used across developments of Xennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes.
+XenFS is a distributed filesystem to be used across developments of Zennet foundation. Specifically, it will serve Xentube. The system will be compatible with torrent downloaders, and support uploading and spreading files between nodes.
 
 Nodes storing the data are getting paid only for uploading, downloading and proving storage. Uploading will charge only the cost of bandwidth. On every download, the node will charge a payment encapsulating both the download bandwidth and the cost of persistant storage. Hence, nodes are motivated to keep the most popular files. It is possible to pay Xencoins and keep arbitrary data persistant even without downloading, as we shall see below regarding periodic proof of storage.
 
@@ -163,7 +163,7 @@ Nodes storing the data are getting paid only for uploading, downloading and prov
 
 ### Architecture
 
-The xenfsd executable will be deployed with xennetd and it will be its only window to the outside world.
+The xenfsd executable will be deployed with Zennetd and it will be its only window to the outside world.
 
 XenFS will work with nodes running slim POSIX VMs, typically FreeBSD. For the simplicity of implementation, debugging, monitoring and future development, we chose to implement XenFS with plain bash commands.
 
@@ -177,10 +177,10 @@ Elements are either parts or metainfo files. They are stored on nodes with their
 
 #### Circuits
 
-When xennetd is launched, it discovers peers for the sake of downloading the blockchain and broadcasting transactions, just like Bitcoin's bootstrap. We call those peers the *Blockchain Peers*. When xenfsd is launched, it should initiate a xennet connection with other nodes participating in the XenFS network, since it is planning to hire services from them (storage, download etc.). Such peers will be called the *Working Peers*. The set of all working peers of a specific node form the node's *circuit*.
+When Zennetd is launched, it discovers peers for the sake of downloading the blockchain and broadcasting transactions, just like Bitcoin's bootstrap. We call those peers the *Blockchain Peers*. When xenfsd is launched, it should initiate a Zennet connection with other nodes participating in the XenFS network, since it is planning to hire services from them (storage, download etc.). Such peers will be called the *Working Peers*. The set of all working peers of a specific node form the node's *circuit*.
 
 
-To bootstrap XenFS with working peers, the client broadcasts a standard Xennet task announcement, with default XenFS or user-custom properties. The Xennet nodes accepting this task are the initial working peers of XenFS. 
+To bootstrap XenFS with working peers, the client broadcasts a standard Zennet task announcement, with default XenFS or user-custom properties. The Zennet nodes accepting this task are the initial working peers of XenFS. 
 
 
 When a large file is downloaded, or with applications such as video streaming, the XenFS client will initiate a connection with working peers holding the desired file parts. Until this finishes, the existing working peers transfer the parts by recursively requesting them from their own working peers.
@@ -221,9 +221,9 @@ Bitorrent interfacce implementation is straight-forward. The metainfo file is ap
 
 ## Xentube
 
-Xentube is a video portal implemented over XenFS and Xennet, with parameterization, configuration and tools allowing a distributed video streaming and encoding service, without the average user having to deal with Xencoins or even know about them.
+Xentube is a video portal implemented over XenFS and Zennet, with parameterization, configuration and tools allowing a distributed video streaming and encoding service, without the average user having to deal with Xencoins or even know about them.
 
-A dedicated Xentube client will be developed. This client will include xennetd and xenfsd, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with xennetd directly or using xennet-qt, as well as for xenfsd.
+A dedicated Xentube client will be developed. This client will include Zennetd and xenfsd, but this part of the application will not be visible to the average user. Of course, the user will have the option to interact with Zennetd directly or using Zennet-qt, as well as for xenfsd.
 
 The video uploading task is the same as in XenFS, with an extra operation. Each video will be encoded into various common resolutions, to allow low-bandwidth streaming or lowering the resolution for i.e. handheld devides. The Xentube client will publish such a task of uploading and encoding with appropriate parameters, to be discussed later.
 
@@ -241,7 +241,7 @@ The above numbers suggests that the serving nodes should be somewhere between 1-
 
 Encoding and streaming uses both CPU, RAM, Hard drive and Bandwidth, all four in at least moderate usage.
 
-We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Xennet and XenFS network, hence increasing the incentive to run a node.
+We recognize that this constellation of resourse consumption might not justify itself, and we account on that our peers will be part of the bigger Zennet and XenFS network, hence increasing the incentive to run a node.
 
 As we described, Xentube is mainly a fine-tuned XenFS with additional features. This fine-tuning of the parameters is yet to be well considered.
 
@@ -249,7 +249,7 @@ As we described, Xentube is mainly a fine-tuned XenFS with additional features. 
 
 **Q**: How can I make sure that the VM I hired is always online, like AWS assure to me?
 
-**A**: Xennet is not intended for such cases. Xennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
+**A**: Zennet is not intended for such cases. Zennet is intended for distributed computing, requiring mass of machines, each performing smaller tasks. Of course, it is the node's incentive to be online, so it will get paid more, but the publishers should not assume that this is the case. Examples of distributed computing that does not require always-online nodes is Bitcoin itself, matrix inversion, NP complete problem solving, Singular Value Decomposition, Video encoding, Web crawling and so on. Those are with huge interest in the world of Big Data. See Apache Mahout for example.
 
 **Q**: Isn't it like MaidSafe?
 
@@ -257,27 +257,27 @@ As we described, Xentube is mainly a fine-tuned XenFS with additional features. 
 
 ## Appendix
 
-### Xennet Robustness and Extra Features
+### Zennet Robustness and Extra Features
 
-1.  In case of a disconnection, it is the node's responsibility to reconnect and rebuild the tunnel. The Xennet client will handle the connection monitoring and restoration. Conversly, the publisher can run a reconnection daemon on the virtual machine. In case such as power failure, the Xennet client will try to re-run the VMs with persistant storage at the expence of the node's (unless the publisher ordered a persistent storage).
+1.  In case of a disconnection, it is the node's responsibility to reconnect and rebuild the tunnel. The Zennet client will handle the connection monitoring and restoration. Conversly, the publisher can run a reconnection daemon on the virtual machine. In case such as power failure, the Zennet client will try to re-run the VMs with persistant storage at the expence of the node's (unless the publisher ordered a persistent storage).
 
-2.  The Xennet client will handle the VMs launching, closing and configuring. It is planned to support both QEMU (for common computers and devices) and XEN (for dedicated Xennet racks or any other reason).
+2.  The Zennet client will handle the VMs launching, closing and configuring. It is planned to support both QEMU (for common computers and devices) and XEN (for dedicated Zennet racks or any other reason).
 
-3.  Xennet client will employ tools for VM resources guarantee, such as `mprotect()` to disable paging, `nice()` to adjust priority, CPU locking, disk space catching, network QOS and so on.
+3.  Zennet client will employ tools for VM resources guarantee, such as `mprotect()` to disable paging, `nice()` to adjust priority, CPU locking, disk space catching, network QOS and so on.
 
-4.  The Xennet client will benchmark the VMs and try to wisely select the most profitable, secure and adequate tasks (all widely configurable by the user). Note that this might be a hard mathematical task, as in combinatorial auctions. Good enough approximations can be used, as well as another industry of pools calculating the best work for each worker. Such pools can also benchmark their members.
+4.  The Zennet client will benchmark the VMs and try to wisely select the most profitable, secure and adequate tasks (all widely configurable by the user). Note that this might be a hard mathematical task, as in combinatorial auctions. Good enough approximations can be used, as well as another industry of pools calculating the best work for each worker. Such pools can also benchmark their members.
 
-5.  The Xennet client will record usage of resources, to confirm the payouts. Sometimes a VM can be slower than when it was benchmarked, and this may cause a lower payout, so the Xennet client will (customably) verify that the payout changes are justified (up to some confidence interval).
+5.  The Zennet client will record usage of resources, to confirm the payouts. Sometimes a VM can be slower than when it was benchmarked, and this may cause a lower payout, so the Zennet client will (customably) verify that the payout changes are justified (up to some confidence interval).
 
-6.  The Xennet client will tend to run several tasks from different publishers in parallel, in order to reduce variance.
+6.  The Zennet client will tend to run several tasks from different publishers in parallel, in order to reduce variance.
 
-7.  The Xennet client will allow to publish and cancel tasks and manually select tasks to perform.
+7.  The Zennet client will allow to publish and cancel tasks and manually select tasks to perform.
 
-8.  Default (thin) OS images will be supplied with the Xennet client. The Xennet client will also offer to automatically install and configure QEMU.
+8.  Default (thin) OS images will be supplied with the Zennet client. The Zennet client will also offer to automatically install and configure QEMU.
 
-### Xennet Technical Notes
+### Zennet Technical Notes
 
-1.  The Xennet client will follow the payouts and act as requested by the user in case of no payout (or no payout yet). The publisher's responsibility is to implement such a system themselves, selecting which nodes to work with and for how much.
+1.  The Zennet client will follow the payouts and act as requested by the user in case of no payout (or no payout yet). The publisher's responsibility is to implement such a system themselves, selecting which nodes to work with and for how much.
 
 2.  For extra-safety, when using QEMU in a general-purpose machine, it can be ran on a separate user inside a `jail`.
 
@@ -287,15 +287,15 @@ As we described, Xentube is mainly a fine-tuned XenFS with additional features. 
 
 QEMU and XEN are both very mature virtualization open source projects. They are packaged on most Linux distributions. QEMU has the advantage that it can be ran on almost any platform, since it supports plain user-space emulation. One can even run Windows over Android using QEMU.
 
-The main difference between QEMU and XEN is that QEMU is like an ordinary virtualization software such as VirtualBox, VMWare Workstation etc. XEN is a system that is being loaded before and behind all operating systems on the platform, so even the “regular” operating system actually runs in a virtual machine. For general purpose computers, or phones, QEMU is the coice. But if one would like to build a Xennet-dedicated machines, they might prefer XEN. XEN also has some support for GPGPU.
+The main difference between QEMU and XEN is that QEMU is like an ordinary virtualization software such as VirtualBox, VMWare Workstation etc. XEN is a system that is being loaded before and behind all operating systems on the platform, so even the “regular” operating system actually runs in a virtual machine. For general purpose computers, or phones, QEMU is the coice. But if one would like to build a Zennet-dedicated machines, they might prefer XEN. XEN also has some support for GPGPU.
 
 #### TBD
 
 * Maybe POS to avoid instant redeeming? Should converge to the risk. Can it be controlled the network?
 
-### Decentralized Organizations over Xennet
+### Decentralized Organizations over Zennet
 
-We shall build the first applications and function as publishers on the Xennet network. All of them will be open-source. Such applications may include:
+We shall build the first applications and function as publishers on the Zennet network. All of them will be open-source. Such applications may include:
 
 1.  CPU mining. Nodes will run various cryptocurrency miners and this will fund their payments.
 
@@ -311,4 +311,4 @@ We shall build the first applications and function as publishers on the Xennet n
 
 7. e-books repository.
 
-Over the next sections we present two applications of Xennet built one of top another: XenFS and Xentube. XenFS is a distributed file system which is torrent compatible. Xentube relies on XenFS and allows media encoding and streaming, playable with any torrent video player. Such an open source player might be packaged with Xentube.
+Over the next sections we present two applications of Zennet built one of top another: XenFS and Xentube. XenFS is a distributed file system which is torrent compatible. Xentube relies on XenFS and allows media encoding and streaming, playable with any torrent video player. Such an open source player might be packaged with Xentube.
