@@ -9,6 +9,8 @@ Rev.1: 30 Apr 2014
 Rev.2: 9 May 2014
 
 1 Jul 2014: Note, SDD document available here https://docs.google.com/document/d/1Y-JKJtJrnGpEISgpEpGKqwmW-atg0_Uk2rJAH5YpaLc/edit?usp=sharing
+and the more updated doc at http://zennet.sc/about
+pricing algorithm is described at http://zennet.sc/zennetpricing.pdf
 
 **Please refer to http://zennet.sc for more updated information.**
 
