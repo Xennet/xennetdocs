@@ -10,7 +10,7 @@ Rev.2: 9 May 2014
 
 1 Jul 2014: Note, SDD document available here https://docs.google.com/document/d/1Y-JKJtJrnGpEISgpEpGKqwmW-atg0_Uk2rJAH5YpaLc/edit?usp=sharing
 
-**Please refer to http://zennet.io for more updated information.**
+**Please refer to http://zennet.sc for more updated information.**
 
 We present Zennet, a Decentralized Application offering an automatic virtualization free-market. Not to be confused with XEN, a successful virtualization software. We also present ZenFS, a distributed high-performance filesystem implemented over Zennet, and ZenTube, a video streaming and distribution system built over ZenFS.
 
